@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+  <!-- UDC -->
+  <category>
+    <pattern>*</pattern>
+    <template>
+        <random>
+            <li><star/>...</li>
+            <li>I have no answer for that.</li>
+            <li>Sorry, can you re-phrase that?</li>
+            <li>I don't understand your question.</li>
+            <li>My responses are limited. You must ask the right questions.</li>
+        </random>
+    </template>
+  </category>
+  <!-- END UDC -->
+
+
+  <!-- Handle greetings -->
+  <category>
+      <pattern>HI</pattern>
+      <template>Hi there! I am a career advisor bot. Would you like information about a specific career or advice on which career to choose?</template>
+  </category>
+
+  <category>
+      <pattern>^ HELP ^</pattern>
+      <template>How can I help you?</template>
+  </category>
+
+  <category>
+      <pattern>*</pattern>
+      <that>HOW CAN I HELP YOU</that>
+      <template>I can give you information about a career or advice on which career to choose. Which would you like?</template>
+  </category>
+
+  <category>
+      <pattern>^ BYE ^</pattern>
+      <template><srai>GOODBYE</srai></template>
+  </category>
+
+  <category>
+      <pattern>GOODBYE</pattern>
+      <template>Bye!</template>
+  </category>
+
+  <category>
+      <pattern>^ THANK YOU ^</pattern>
+      <template><srai>THANKS</srai></template>
+  </category>
+
+  <category>
+      <pattern>THANKS</pattern>
+      <template>Your welcome!</template>
+  </category>
+  <!-- END Handle greetings -->
+
+
+  <!-- Handle information inquery -->
+  <category>
+      <pattern>^ INFO ^</pattern>
+      <template><srai>INFORMATION</srai></template>
+  </category>
+
+  <category>
+      <pattern>^ INFORMATION ^</pattern>
+      <template><srai>INFORMATION</srai></template>
+  </category>
+
+  <category>
+      <pattern>^ SPECIFIC CAREER ^</pattern>
+      <template><srai>INFORMATION</srai></template>
+  </category>
+
+  <category>
+      <pattern>INFORMATION</pattern>
+      <template>
+          I can give you information about the following careers:<br/><br/>
+          Software Engineer, Web Developer, Data Scientist, Network Administrator, and Database Administrator.<br/><br/>
+          Which are you interested in?
+          <think><set name="topic">information</set></think>
+      </template>
+  </category>
+  <!-- END handle information inquery -->
+
+
+  <!-- Handle information topic -->
+  <topic name="information">
+
+      <category>
+          <pattern>*</pattern>
+          <template>I'm sorry, I didn't catch that. Do you still want information on a career?</template>
+      </category>
+
+      <!-- Exit information topic -->
+      <category>
+          <pattern>^ NO ^</pattern>
+          <that>DO YOU STILL WANT INFORMATION ON A CAREER</that>
+          <template>
+              No worries. What else can I help you with?
+              <think><set name="topic">*</set></think>
+          </template>
+      </category>
+
+      <!-- Show buttons to help user choose the correct option -->
+      <category>
+          <pattern>^ YES ^</pattern>
+          <that>DO YOU STILL WANT INFORMATION ON A CAREER</that>
+          <template>
+              Which career would you like information on?
+              <button>
+                  <text>Software Engineer</text>
+                  <postback>SOFTWAREENGINEER</postback>
+              </button>
+              <button>
+                  <text>Web Developer</text>
+                  <postback>WEBDEVELOPER</postback>
+              </button>
+              <button>
+                  <text>Data Scientist</text>
+                  <postback>DATASCIENTIST</postback>
+              </button>
+              <button>
+                  <text>Network Administrator</text>
+                  <postback>NETWORKADMINISTRATOR</postback>
+              </button>
+              <button>
+                  <text>Database Administrator</text>
+                  <postback>DATABASEADMINISTRATOR</postback>
+              </button>
+          </template>
+      </category>
+
+      <!-- Reduce options -->
+      <category>
+          <pattern>^ Software Engineer ^</pattern>
+          <template><srai>SOFTWAREENGINEER</srai></template>
+      </category>
+      <category>
+          <pattern>^ Software Engineers ^</pattern>
+          <template><srai>SOFTWAREENGINEER</srai></template>
+      </category>
+      <category>
+          <pattern>^ Web Developer ^</pattern>
+          <template><srai>WEBDEVELOPER</srai></template>
+      </category>
+      <category>
+          <pattern>^ Web Developers ^</pattern>
+          <template><srai>WEBDEVELOPER</srai></template>
+      </category>
+      <category>
+          <pattern>^ Data Scientist ^</pattern>
+          <template><srai>DATASCIENTIST</srai></template>
+      </category>
+      <category>
+          <pattern>^ Data Scientists ^</pattern>
+          <template><srai>DATASCIENTIST</srai></template>
+      </category>
+      <category>
+          <pattern>^ Network Administrator ^</pattern>
+          <template><srai>NETWORKADMINISTRATOR</srai></template>
+      </category>
+      <category>
+          <pattern>^ Network Administrators ^</pattern>
+          <template><srai>NETWORKADMINISTRATOR</srai></template>
+      </category>
+      <category>
+          <pattern>^ Database Administrator ^</pattern>
+          <template><srai>DATABASEADMINISTRATOR</srai></template>
+      </category>
+      <category>
+          <pattern>^ Database Administrators ^</pattern>
+          <template><srai>DATABASEADMINISTRATOR</srai></template>
+      </category>
+
+      <!-- Handle options -->
+      <category>
+          <pattern>SOFTWAREENGINEER</pattern>
+          <template>Software engineers build applications for companies. They typically build application software using an integrated development environment (IDE). The types of applications can run on laptop or desktop computers, mobile devices, or even in the cloud.</template>
+      </category>
+      <category>
+          <pattern>WEBDEVELOPER</pattern>
+          <template>Web Developers build websites. They often focus on front end development (the user interface), but work on the backend as well.</template>
+      </category>
+      <category>
+          <pattern>DATASCIENTIST</pattern>
+          <template>Data Scientists are masters when it comes to working with data. We live in a data-centric world where information is power and Data Scientists help organize data into meaningful information that companies can use to make decisions.</template>
+      </category>
+      <category>
+          <pattern>NETWORKADMINISTRATOR</pattern>
+          <template>Every company needs a network to share files and information in the office. Network Administrators set up and manage networks in organizations.</template>
+      </category>
+      <category>
+          <pattern>DATABASEADMINISTRATOR</pattern>
+          <template>Data is being generated today at unprecedented speed and scale. In order for that data to be useful, it needs to be held somewhere so that it can be analyzed. Database Administrators set up and maintain databases to house information for organizations.</template>
+      </category>
+  </topic>
+  <!-- END handle information topic -->
+
+
+  <!-- Handle advice inquery -->
+  <category>
+      <pattern>^ CAREER ^ CHOOSE ^</pattern>
+      <template><srai>ADVICE</srai></template>
+  </category>
+
+  <category>
+      <pattern>^ ADVICE ^</pattern>
+      <template><srai>ADVICE</srai></template>
+  </category>
+
+  <category>
+      <pattern>ADVICE</pattern>
+      <template>
+          <think><set name="topic">advice</set></think>
+          <condition name="advice">
+              <li value="Web Developer">Based on our earlier discussion, I think you should be a Web Developer.</li>
+              <li value="Software Engineer">Based on our earlier discussion, I think you should be a Software Engineer.</li>
+              <li value="Data Scientist">Based on our earlier discussion, I think you should be a Data Scientist.</li>
+              <li value="Database Administrator">Based on our earlier discussion, I think you should be a Database Administrator.</li>
+              <li value="Network Administrator">Based on our earlier discussion, I think you should be a Network Administrator.</li>
+              <li>
+                  <condition name="build_analyze_maintain">
+                      <li value="build"><srai>BUILD</srai></li>
+                      <li>
+                          In order to give you advice, I'll need to know a little more about you.
+                          If you could only choose one, would you rather build something, analyze something, or maintain something?
+                      </li>
+                  </condition>
+              </li>
+          </condition>
+      </template>
+  </category>
+  <!-- END handle advice inquery -->
+
+
+  <!-- Handle advice topic -->
+  <topic name="advice">
+
+      <category>
+          <pattern>*</pattern>
+          <template>Sorry, I didn't catch that. Do you want to start the advising process over?</template>
+      </category>
+
+      <category>
+          <pattern>^ YES ^</pattern>
+          <that>DO YOU WANT TO START THE ADVISING PROCESS OVER</that>
+          <template>
+              <think>
+                  <set name="advice">*</set>
+                  <set name="build_analyze_maintain">*</set>
+              </think>
+              <srai>ADVICE</srai>
+          </template>
+      </category>
+
+      <category>
+          <pattern>^ NO ^</pattern>
+          <that>DO YOU WANT TO START THE ADVISING PROCESS OVER</that>
+          <template>
+              <srai>ADVICE</srai>
+          </template>
+      </category>
+
+      <!-- Build -->
+      <!-- Users can choose to build on a specific device or on a web browser. -->
+
+      <!-- Reduce Build. -->
+      <category>
+          <pattern>^ BUILD ^</pattern>
+          <template><srai>CHOOSEBUILD</srai></template>
+      </category>
+
+      <!-- Handle Build. -->
+      <category>
+          <pattern>CHOOSEBUILD</pattern>
+          <!--<that>IF YOU COULD ONLY CHOOSE ONE, WOULD YOU RATHER BUILD SOMETHING, ANALYZE SOMETHING, OR MAINTAIN SOMETHING</that>-->
+          <think><set name="build_analyze_maintain">build</set></think>
+          <template>
+              Would you rather build something on a specific device or on a web browser?
+              <think><set name="build_analyze_maintain">build</set></think>
+          </template>
+      </category>
+
+      <category>
+          <pattern>^ BROWSER ^</pattern>
+          <that>WOULD YOU RATHER BUILD SOMETHING ON A SPECIFIC DEVICE OR ON A WEB BROWSER</that>
+          <template>
+              My advice is that you pursue being a Web Developer.
+              <think><set name="advice">Web Developer</set></think>
+          </template>
+      </category>
+
+      <category>
+          <pattern>^ DEVICE ^</pattern>
+          <that>WOULD YOU RATHER BUILD SOMETHING ON A SPECIFIC DEVICE OR ON A WEB BROWSER</that>
+          <template>
+              My advice is that you pursue being a Software Engineer.
+              <think><set name="advice">Software Engineer</set></think>
+          </template>
+      </category>
+      <!-- END Build -->
+
+      <!-- Analyze -->
+      <!-- Users can choose to analyze Data or Algorithms. -->
+
+      <!-- Reduce Analyze. -->
+      <category>
+          <pattern>^ ANALYZE ^</pattern>
+          <template><srai>CHOOSEANALYZE</srai></template>
+      </category>
+
+      <!-- Handle Analyze. -->
+      <category>
+          <pattern>CHOOSEANALYZE</pattern>
+          <template>
+              <think><set name="build_analyze_maintain">analyze</set></think>
+              Would you rather analyze data or algorithms?
+          </template>
+      </category>
+
+      <!-- Reduce Data. -->
+      <category>
+          <pattern>^ DATA ^</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <template><srai>CHOOSEDATA</srai></template>
+      </category>
+
+      <category>
+          <pattern>^ ANALYZE DATA ^</pattern>
+          <template><srai>CHOOSEDATA</srai></template>
+      </category>
+
+      <!-- Handle choosing data. -->
+      <category>
+          <pattern>CHOOSEDATA</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <template>
+              My advice is that you pursue being a Data Scientist.
+              <think><set name="advice">Data Scientist</set></think>
+          </template>
+      </category>
+
+      <!-- Reduce Algorithms. -->
+      <category>
+          <pattern>^ ANALYZE ALGORITHMS ^</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <srai>CHOOSEALGORITHMS</srai>
+      </category>
+
+      <category>
+          <pattern>^ ANALYZE ALGORITHM ^</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <srai>CHOOSEALGORITHMS</srai>
+      </category>
+
+      <category>
+          <pattern>^ ALGORITHMS ^</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <template><srai>CHOOSEALGORITHMS</srai></template>
+      </category>
+
+      <category>
+          <pattern>^ ALGORITHM ^</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <template><srai>CHOOSEALGORITHMS</srai></template>
+      </category>
+
+      <!-- Handle choosing algorithms. -->
+      <category>
+          <pattern>CHOOSEALGORITHMS</pattern>
+          <that>WOULD YOU RATHER ANALYZE DATA OR ALGORITHMS</that>
+          <template>
+              My advice is that you pursue being a Software Engineer.
+              <think><set name="advice">Software Engineer</set></think>
+          </template>
+      </category>
+      <!-- END Analyze -->
+
+      <!-- Maintain -->
+      <!-- Users can choose to store or share data. -->
+      <category>
+          <pattern>^ MAINTAIN ^</pattern>
+          <template><srai>CHOOSEMAINTAIN</srai></template>
+      </category>
+
+      <category>
+          <pattern>CHOOSEMAINTAIN</pattern>
+          <template>
+              <think><set name="build_analyze_maintain">analyze</set></think>
+              Would you rather work to store data or share data?
+          </template>
+      </category>
+
+      <!-- Reduce Store Data. -->
+      <category>
+          <pattern>^ STORE DATA ^</pattern>
+          <template><srai>CHOOSESTORE</srai></template>
+      </category>
+
+      <category>
+          <pattern>^ STORE ^</pattern>
+          <template><srai>CHOOSESTORE</srai></template>
+      </category>
+
+      <!-- Handle Store Data. -->
+      <category>
+          <pattern>CHOOSESTORE</pattern>
+          <template>
+              My advice is that you pursue being a Database Administrator.
+              <think><set name="advice">Database Administrator</set></think>
+          </template>
+      </category>
+
+      <!-- Reduce Share Data. -->
+      <category>
+          <pattern>^ SHARE ^</pattern>
+          <template><srai>CHOOSESHARE</srai></template>
+      </category>
+
+      <!-- Handle Share Data. -->
+      <category>
+          <pattern>CHOOSESHARE</pattern>
+          <template>
+              My advice is that you pursue being a Network Administrator.
+              <think><set name="advice">Network Administrator</set></think>
+          </template>
+      </category>
+  </topic>
+  <!-- END Handle advice topic -->
+
+</aiml>
